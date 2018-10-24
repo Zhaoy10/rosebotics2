@@ -223,6 +223,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         # TODO.
 
     def wait_until_color_is_one_of(self, colors):
+
         """
         Waits (doing nothing new) until the sensor's measurement
         of what color it sees is any one of the given sequence of colors.
