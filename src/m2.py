@@ -15,15 +15,13 @@ def run_test_trace():
     frnb = rb.Snatch3rRobot()
 
     while frnb.touch_sensor.get_value() == 0:
-        left = 60
-        right = 50
-        while frnb.color_sensor.get_color() == 1:
-            frnb.drive_system.start_moving(left, right)
-            break
+        left = 24
+        right = 20
+        frnb.drive_system.start_moving(left, right)
 
         while frnb.color_sensor.get_color() != 1:
-            if left < 90:
-                left = left+5
+            if left < 60:
+                left = left+1
             frnb.drive_system.start_moving(left, right)
             break
         break
