@@ -14,7 +14,7 @@ def main():
 def run_test_trace():
     frnb = rb.Snatch3rRobot()
 
-    while frnb.touch_sensor.get_value() == 0:
+    for k in range(5):
         left = 24
         right = 20
         frnb.drive_system.start_moving(left, right)
@@ -24,8 +24,7 @@ def run_test_trace():
                 left = left+1
             frnb.drive_system.start_moving(left, right)
             break
-        break
 
-    frnb.drive_system.stop_moving()
+        frnb.drive_system.stop_moving()
 
 main()
