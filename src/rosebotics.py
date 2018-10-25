@@ -235,6 +235,7 @@ class ColorSensor(low_level_rb.ColorSensor):
 
         while True:
             if reflected_light_intensity <=100 and reflected_light_intensity >=0:
+                print(self.get_reflected_intensity())
                 if self.get_reflected_intensity() > reflected_light_intensity:
                     break
             else:
@@ -247,10 +248,13 @@ class ColorSensor(low_level_rb.ColorSensor):
         of what color it sees is the given color.
         The given color must be a Color (as defined above).
         """
-
         while True:
-            if self.get_color() == color:
-                break
+            if color >= 0 and color <= 7:
+                if self.get_color() == color:
+                    print(color)
+                    break
+            else:
+                print('Entered Color Over Range')
         # TODO.
 
     def wait_until_color_is_one_of(self, colors):
