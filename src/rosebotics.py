@@ -243,6 +243,7 @@ class ColorSensor(low_level_rb.ColorSensor):
 
         while True:
             if reflected_light_intensity <=100 and reflected_light_intensity >=0:
+                print(self.get_reflected_intensity())
                 if self.get_reflected_intensity() > reflected_light_intensity:
                     break
             else:
@@ -256,7 +257,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         The given color must be a Color (as defined above).
         """
         while True:
-            if color >= 0 and color >= 7:
+            if color >= 0 and color <= 7:
                 if self.get_color() == color:
                     print(color)
                     break
@@ -271,7 +272,11 @@ class ColorSensor(low_level_rb.ColorSensor):
         of what color it sees is any one of the given sequence of colors.
         Each item in the sequence must be a Color (as defined above).
         """
-        # TODO.
+
+        while True:
+            for k in range(len(colors)):
+                if self.get_color() == colors[k]:
+                    break
 
 
 class InfraredSensorAsProximitySensor(object):
