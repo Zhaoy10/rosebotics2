@@ -10,8 +10,8 @@ import time
 def main():
     """ Runs YOUR specific part of the project """
     frjb=rb.Snatch3rRobot()
-    frjb.drive_system.start_moving(100,100)
-    time.sleep(2)
+    frjb.drive_system.start_moving(100,-100)
+    time.sleep(5)
     frjb.drive_system.stop_moving()
 
 main()
