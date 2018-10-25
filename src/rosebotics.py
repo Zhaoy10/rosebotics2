@@ -103,7 +103,7 @@ class DriveSystem(object):
                            stop_action=StopAction.BRAKE):
         self.start_moving(duty_cycle_percent,duty_cycle_percent)
         start_time=time.time()
-        ctime=inches*xxxxx
+        ctime=inches*0.1
         while True:
             if time.time()-start_time>ctime:
                 self.stop_moving(stop_action)
