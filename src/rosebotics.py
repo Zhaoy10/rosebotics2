@@ -121,6 +121,13 @@ class DriveSystem(object):
                               degrees,
                               duty_cycle_percent=100,
                               stop_action=StopAction.BRAKE):
+        self.start_moving(duty_cycle_percent,-duty_cycle_percent)
+        start_time=time.time()
+        stime=degrees*1/135
+        while True:
+            if time.time()-start_time>stime:
+                self.stop_moving(stop_action)
+                break
         """
         Spin in place (i.e., both wheels move, in opposite directions)
         the given number of degrees, at the given speed (-100 to 100,
