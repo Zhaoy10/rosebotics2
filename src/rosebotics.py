@@ -247,13 +247,10 @@ class ColorSensor(low_level_rb.ColorSensor):
         of what color it sees is the given color.
         The given color must be a Color (as defined above).
         """
+
         while True:
-            if color >= 0 and color >= 7:
-                if self.get_color() == color:
-                    print(color)
-                    break
-            else:
-                print('Entered Color Over Range')
+            if self.get_color() == color:
+                break
         # TODO.
 
     def wait_until_color_is_one_of(self, colors):
