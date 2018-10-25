@@ -128,6 +128,7 @@ class DriveSystem(object):
             if time.time()-start_time>stime:
                 self.stop_moving(stop_action)
                 break
+        a=0
         """
         Spin in place (i.e., both wheels move, in opposite directions)
         the given number of degrees, at the given speed (-100 to 100,
