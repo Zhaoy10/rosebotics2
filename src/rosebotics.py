@@ -245,7 +245,8 @@ class ColorSensor(low_level_rb.ColorSensor):
         """
         while True:
             if color >= 0 and color >= 7:
-                if self.get_value() == color:
+                if self.get_color() == color:
+                    print(color)
                     break
             else:
                 print('Entered Color Over Range')
