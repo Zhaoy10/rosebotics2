@@ -101,6 +101,14 @@ class DriveSystem(object):
                            inches,
                            duty_cycle_percent=100,
                            stop_action=StopAction.BRAKE):
+        self.start_moving(duty_cycle_percent,duty_cycle_percent)
+        start_time=time.time()
+        ctime=inches*xxxxx
+        while True:
+            if time.time()-start_time>ctime:
+                self.stop_moving(stop_action)
+                break
+
         """
         Go straight at the given speed (-100 to 100, negative is backwards)
         for the given number of inches, stopping with the given StopAction.
