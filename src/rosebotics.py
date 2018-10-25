@@ -198,7 +198,7 @@ class TouchSensor(low_level_rb.TouchSensor):
         while True:
             if self.get_value() == 0:
                 break
-
+#vdg
 
 class Camera(object):
     """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
