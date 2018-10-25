@@ -264,7 +264,11 @@ class ColorSensor(low_level_rb.ColorSensor):
         of what color it sees is any one of the given sequence of colors.
         Each item in the sequence must be a Color (as defined above).
         """
-        # TODO.
+
+        while True:
+            for k in range(len(colors)):
+                if self.get_color() == colors[k]:
+                    break
 
 
 class InfraredSensorAsProximitySensor(object):
