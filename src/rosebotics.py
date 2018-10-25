@@ -42,7 +42,7 @@ class Snatch3rRobot(object):
                  color_sensor_port=ev3.INPUT_3,
                  infrared_sensor_port=ev3.INPUT_4):
         # All the methods in this class "delegate" their work to the appropriate
-        # subsystem:  drive_system, touch_sensor, camera, olor_sensor, etc.
+        # subsystem:  drive_system, touch_sensor, camera, color_sensor, etc.
         self.drive_system = DriveSystem(left_wheel_port, right_wheel_port)
         # self.arm = ArmAndClaw(arm_port)
         self.touch_sensor = TouchSensor(touch_sensor_port)
@@ -204,6 +204,14 @@ class ColorSensor(low_level_rb.ColorSensor):
         light intensity is less than the given value (threshold), which should
         be between 0 (no light reflected) and 100 (maximum light reflected).
         """
+
+        while True:
+            if reflected_light_intensity <=100 and reflected_light_intensity >=0:
+                if self.get_reflected_intensity() < reflected_light_intensity:
+                    break
+            else:
+                print('Entered Number Over Range')
+
         # TODO.
 
     def wait_until_intensity_is_greater_than(self, reflected_light_intensity):
@@ -212,6 +220,13 @@ class ColorSensor(low_level_rb.ColorSensor):
         light intensity is greater than the given value (threshold), which
         should be between 0 (no light reflected) and 100 (max light reflected).
         """
+
+        while True:
+            if reflected_light_intensity <=100 and reflected_light_intensity >=0:
+                if self.get_reflected_intensity() > reflected_light_intensity:
+                    break
+            else:
+                print('Entered Number Over Range')
         # TODO.
 
     def wait_until_color_is(self, color):
@@ -220,6 +235,12 @@ class ColorSensor(low_level_rb.ColorSensor):
         of what color it sees is the given color.
         The given color must be a Color (as defined above).
         """
+        while True:
+            if color >= 0 and color >= 7:
+                if self.get_value() == color:
+                    break
+            else:
+                print('Entered Color Over Range')
         # TODO.
 
     def wait_until_color_is_one_of(self, colors):
