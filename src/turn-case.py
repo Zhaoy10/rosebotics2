@@ -15,7 +15,8 @@ def main():
 def test_turn():
     frsb=rb.Snatch3rRobot()
     frsb.drive_system.spin_in_place_degrees(90)
-
+    time.sleep(5)
+    frsb.drive_system.spin_in_place_degrees(-90)
 
 
 main()
