@@ -8,10 +8,12 @@ import time
 
 
 def main():
+    test_turn()
     """ Runs YOUR specific part of the project """
-    frjb=rb.Snatch3rRobot()
-    frjb.drive_system.start_moving(100,-100)
-    time.sleep(1)
-    frjb.drive_system.stop_moving()
+def test_turn():
+    frsb=rb.Snatch3rRobot()
+    frsb.drive_system.spin_in_place_degrees(90)
+
+
 
 main()

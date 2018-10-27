@@ -121,9 +121,15 @@ class DriveSystem(object):
                               degrees,
                               duty_cycle_percent=100,
                               stop_action=StopAction.BRAKE):
-        self.start_moving(duty_cycle_percent,-duty_cycle_percent)
+
         start_time=time.time()
-        stime=degrees*1/135
+        if degrees>0:
+
+            stime=degrees*1/135
+            self.start_moving(duty_cycle_percent, -duty_cycle_percent)
+        else:
+            stime=-degrees*1/135
+            self.start_moving(-duty_cycle_percent, duty_cycle_percent)
         while True:
             if time.time()-start_time>stime:
                 self.stop_moving(stop_action)
