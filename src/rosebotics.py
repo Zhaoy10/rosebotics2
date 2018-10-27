@@ -226,7 +226,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         """
 
         while True:
-            if reflected_light_intensity <=100 and reflected_light_intensity >=-100:
+            if reflected_light_intensity <=100 and reflected_light_intensity >=0:
                 print(self.get_reflected_intensity())
                 if self.get_reflected_intensity() < reflected_light_intensity:
                     break
@@ -243,7 +243,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         """
 
         while True:
-            if reflected_light_intensity <=100 and reflected_light_intensity >=-100:
+            if reflected_light_intensity <=100 and reflected_light_intensity >=-0:
                 print(self.get_reflected_intensity())
                 if self.get_reflected_intensity() > reflected_light_intensity:
                     break
