@@ -227,12 +227,13 @@ class ColorSensor(low_level_rb.ColorSensor):
 
         while True:
             if reflected_light_intensity <=100 and reflected_light_intensity >=0:
+                print(self.get_reflected_intensity())
                 if self.get_reflected_intensity() < reflected_light_intensity:
                     break
             else:
                 print('Entered Number Over Range')
 
-        # TODO.
+        # DONE.
 
     def wait_until_intensity_is_greater_than(self, reflected_light_intensity):
         """
@@ -248,7 +249,7 @@ class ColorSensor(low_level_rb.ColorSensor):
                     break
             else:
                 print('Entered Number Over Range')
-        # TODO.
+        # DONE.
 
     def wait_until_color_is(self, color):
         """
@@ -263,7 +264,7 @@ class ColorSensor(low_level_rb.ColorSensor):
                     break
             else:
                 print('Entered Color Over Range')
-        # TODO.
+        # DONE.
 
     def wait_until_color_is_one_of(self, colors):
 
@@ -276,6 +277,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         while True:
             for k in range(len(colors)):
                 if self.get_color() == colors[k]:
+                    print(colors[k])
                     break
 
 
