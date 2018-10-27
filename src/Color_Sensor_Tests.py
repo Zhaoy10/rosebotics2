@@ -29,7 +29,7 @@ def run_test_wait_until_color_is():
     frnb.drive_system.start_moving(60, 60)
     time.sleep(2)
     frnb.color_sensor.wait_until_color_is(6)
-    print('Yellow Detected')
+    print('White Detected')
     frnb.drive_system.stop_moving()
     time.sleep(5)
 
