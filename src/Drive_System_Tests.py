@@ -41,25 +41,16 @@ def run_test_spin_in_place_degrees():
 
 def run_test_turn_degrees():
     frnb = rb.Snatch3rRobot()
-    frnb.drive_system.start_moving(100, 0)
-    time.sleep(2)
+    print('Test 1 Starts')
+    frnb.drive_system.start_moving(100, 100)
+    frnb.drive_system.turn_degrees(120)
     frnb.drive_system.stop_moving()
-    pass
-    # frnb = rb.Snatch3rRobot()
-    # print('Test 1 Starts')
-    # frnb.drive_system.start_moving(60, 60)
-    # time.sleep(2)
-    # frnb.color_sensor.wait_until_intensity_is_less_than(40)
-    # print('Weak Dark Detected!')
-    # frnb.drive_system.stop_moving()
-    # time.sleep(5)
-    #
-    # print('Test 2 Starts')
-    # frnb.drive_system.start_moving(60, 60)
-    # time.sleep(2)
-    # frnb.color_sensor.wait_until_intensity_is_less_than(5)
-    # print('Deep Dark Detected!')
-    # frnb.drive_system.stop_moving()
-    # time.sleep(5)
+    time.sleep(5)
+
+    print('Test 2 Starts')
+    frnb.drive_system.start_moving(100, 100)
+    frnb.drive_system.turn_degrees(-60)
+    frnb.drive_system.stop_moving()
+    time.sleep(5)
 
 main()
