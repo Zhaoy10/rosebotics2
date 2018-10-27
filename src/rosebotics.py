@@ -125,10 +125,10 @@ class DriveSystem(object):
         start_time=time.time()
         if degrees>0:
 
-            stime=degrees*1/130
+            stime=degrees*1/125
             self.start_moving(duty_cycle_percent, -duty_cycle_percent)
         else:
-            stime=-degrees*1/130
+            stime=-degrees*1/125
             self.start_moving(-duty_cycle_percent, duty_cycle_percent)
         while True:
             if time.time()-start_time>stime:

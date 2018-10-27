@@ -9,64 +9,53 @@ import time
 
 def main():
     """ Runs YOUR specific part of the project """
-    run_test_wait_until_color_is()
-    run_test_wait_until_intensity_is_greater_than()
-    run_test_wait_until_intensity_is_less_than()
+    run_test_go_straight_inches()
+    run_test_spin_in_place_degrees()
+    run_test_turn_degrees()
 
 
 
-def run_test_wait_until_color_is():
+def run_test_go_straight_inches():
     frnb = rb.Snatch3rRobot()
     print("Test 1 Starts")
-    frnb.drive_system.start_moving(60, 60)
-    time.sleep(2)
-    frnb.color_sensor.wait_until_color_is(1)
-    print('Black Detected!')
+    frnb.drive_system.go_straight_inches(10)
     frnb.drive_system.stop_moving()
     time.sleep(5)
 
     print('Test 2 Starts')
-    frnb.drive_system.start_moving(60, 60)
-    time.sleep(2)
-    frnb.color_sensor.wait_until_color_is(6)
-    print('White Detected')
+    frnb.drive_system.go_straight_inches(-20)
     frnb.drive_system.stop_moving()
     time.sleep(5)
 
-def run_test_wait_until_intensity_is_greater_than():
+def run_test_spin_in_place_degrees():
     frnb = rb.Snatch3rRobot()
     print('Test 1 Starts')
-    frnb.drive_system.start_moving(60, 60)
-    time.sleep(2)
-    frnb.color_sensor.wait_until_intensity_is_greater_than(5)
-    print('Weak Light Detected!')
+    frnb.drive_system.spin_in_place_degrees(90)
     frnb.drive_system.stop_moving()
     time.sleep(5)
 
     print('Test 2 Starts')
-    frnb.drive_system.start_moving(60, 60)
-    time.sleep(2)
-    frnb.color_sensor.wait_until_intensity_is_greater_than(20)
-    print('Strong Light Detected!')
+    frnb.drive_system.spin_in_place_degrees(-180)
     frnb.drive_system.stop_moving()
     time.sleep(5)
 
-def run_test_wait_until_intensity_is_less_than():
-    frnb = rb.Snatch3rRobot()
-    print('Test 1 Starts')
-    frnb.drive_system.start_moving(60, 60)
-    time.sleep(2)
-    frnb.color_sensor.wait_until_intensity_is_less_than(40)
-    print('Weak Dark Detected!')
-    frnb.drive_system.stop_moving()
-    time.sleep(5)
-
-    print('Test 2 Starts')
-    frnb.drive_system.start_moving(60, 60)
-    time.sleep(2)
-    frnb.color_sensor.wait_until_intensity_is_less_than(5)
-    print('Deep Dark Detected!')
-    frnb.drive_system.stop_moving()
-    time.sleep(5)
+def run_test_turn_degrees():
+    pass
+    # frnb = rb.Snatch3rRobot()
+    # print('Test 1 Starts')
+    # frnb.drive_system.start_moving(60, 60)
+    # time.sleep(2)
+    # frnb.color_sensor.wait_until_intensity_is_less_than(40)
+    # print('Weak Dark Detected!')
+    # frnb.drive_system.stop_moving()
+    # time.sleep(5)
+    #
+    # print('Test 2 Starts')
+    # frnb.drive_system.start_moving(60, 60)
+    # time.sleep(2)
+    # frnb.color_sensor.wait_until_intensity_is_less_than(5)
+    # print('Deep Dark Detected!')
+    # frnb.drive_system.stop_moving()
+    # time.sleep(5)
 
 main()
