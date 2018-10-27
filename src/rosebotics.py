@@ -101,9 +101,14 @@ class DriveSystem(object):
                            inches,
                            duty_cycle_percent=100,
                            stop_action=StopAction.BRAKE):
-        self.start_moving(duty_cycle_percent,duty_cycle_percent)
+
         start_time=time.time()
-        ctime=inches*0.1
+        if inches>0:
+            ctime=inches*0.1
+            self.start_moving(duty_cycle_percent, duty_cycle_percent)
+        else:
+            ctime=inches*(-0.1)
+            self.start_moving(-duty_cycle_percent, -duty_cycle_percent)
         while True:
             if time.time()-start_time>ctime:
                 self.stop_moving(stop_action)
@@ -134,7 +139,7 @@ class DriveSystem(object):
             if time.time()-start_time>stime:
                 self.stop_moving(stop_action)
                 break
-        a=0
+
         """
         Spin in place (i.e., both wheels move, in opposite directions)
         the given number of degrees, at the given speed (-100 to 100,
@@ -149,6 +154,17 @@ class DriveSystem(object):
                      degrees,
                      duty_cycle_percent=100,
                      stop_action=StopAction.BRAKE):
+        start_time=time.time()
+        if degrees>0:
+            stime=degrees*1/(52.5)
+            self.start_moving(duty_cycle_percent,0)
+        else:
+            stime=degrees*(-1/(52.5))
+            self.start_moving(0,duty_cycle_percent)
+        while True:
+            if time.time()-start_time>stime:
+                self.stop_moving(stop_action)
+                break
         """
         Turn (i.e., only one wheel moves)
         the given number of degrees, at the given speed (-100 to 100,
