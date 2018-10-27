@@ -40,6 +40,10 @@ def run_test_spin_in_place_degrees():
     time.sleep(5)
 
 def run_test_turn_degrees():
+    frnb = rb.Snatch3rRobot()
+    frnb.drive_system.start_moving(100, 0)
+    time.sleep(2)
+    frnb.drive_system.stop_moving()
     pass
     # frnb = rb.Snatch3rRobot()
     # print('Test 1 Starts')
