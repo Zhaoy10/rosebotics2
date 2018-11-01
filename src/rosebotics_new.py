@@ -773,7 +773,7 @@ class ArmAndClaw(object):
         # DONE: Do this as STEP 1 of implementing this class.
         self.motor.start_spinning(100)
         self.touch_sensor.wait_until_pressed()
-        self.motor.stop_action()
+        self.motor.stop_spinning()
 
     def move_arm_to_position(self, position):
         """
@@ -782,9 +782,9 @@ class ArmAndClaw(object):
         """
         # DONE: Do this as STEP 3 of implementing this class.
 
-    deg = position - self.position
-    self.motor.start_spinning(-100)
-    while True:
-        if self.motor.get_degrees_spun() >= deg:
-            self.motor.stop_moving()
-            break
+        deg = position - self.position
+        self.motor.start_spinning(-100)
+        while True:
+            if self.motor.get_degrees_spun() >= deg:
+                self.motor.stop_spinning()
+                break
