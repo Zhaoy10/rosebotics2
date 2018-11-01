@@ -48,6 +48,12 @@ def run_test_ir():
         print("Touch sensor:",
               robot.touch_sensor.get_value(),
               robot.touch_sensor.is_pressed())
+        print('Color sensor:',
+              robot.color_sensor.get_color(),
+              robot.color_sensor.get_reflected_intensity())
+        print('Proximity_sensor',
+              robot.proximity_sensor.get_distance_to_nearest_object(),
+              robot.proximity_sensor.get_distance_to_nearest_object_in_inches())
 
         character = input(
             "Press the ENTER (return) key to continue, or q to quit: ")
