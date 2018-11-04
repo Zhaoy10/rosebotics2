@@ -15,8 +15,8 @@ def main():
 
 def run_tests():
     """ Runs various tests. """
-    run_test_ir()
-    # run_test_drive_system()
+    # run_test_ir()
+    run_test_drive_system()
     # run_test_touch_sensor()
     # run_test_color_sensor()
     run_test_arm()
@@ -51,7 +51,8 @@ def run_test_ir():
         print('Color sensor:',
               robot.color_sensor.get_color(),
               robot.color_sensor.get_reflected_intensity())
-        print('Camera:', robot.camera.get_biggest_blob())
+        print('Camera:',
+              robot.camera.get_biggest_blob())
         print('Proximity_sensor:',
               robot.proximity_sensor.get_distance_to_nearest_object(),
               robot.proximity_sensor.get_distance_to_nearest_object_in_inches())
@@ -143,24 +144,6 @@ def run_test_color_sensor():
               "{:4}".format(robot.color_sensor.get_reflected_intensity()))
         time.sleep(0.5)
         count = count + 1
-
-def run_test_arm_and_claw():
-    robot = rb.Snatch3rRobot
-
-    print()
-    print("Testing the  touch_sensor  of the robot.")
-    print("Repeatedly press and release the touch sensor.")
-    print("Press Control-C when you are ready to stop testing.")
-
-    robot.arm.calibrate()
-    robot.arm.move_arm_to_position(0)
-
-    time.sleep(5)
-
-    robot.arm.raise_arm_and_close_claw()
-    robot.arm.move_arm_to_position(0)
-
-
 
 
 main()
