@@ -35,25 +35,32 @@ def run_test_ir():
     robot = rb.Snatch3rRobot()
 
     while True:
-        # TODO: Print the value of the following, one at a time. For each,
-        # TODO:   do the appropriate user actions (e.g. try pressing a button
-        # TODO:   on the Beacon and see what the beacon_button_sensor produces).
-        # TODO:   Discover what values the sensors produce in which situations.
+        # DONE: Print the value of the following, one at a time. For each,
+        # DONE:   do the appropriate user actions (e.g. try pressing a button
+        # DONE:   on the Beacon and see what the beacon_button_sensor produces).
+        # DONE:   Discover what values the sensors produce in which situations.
         #    touch_sensor
         #    color_sensor
         #    camera
         #    proximity_sensor
         #    beacon_sensor  NOT YET IMPLEMENTED
         #    beacon_button_sensor  NOT YET IMPLEMENTED
-        print("Touch sensor:",
+        print('Touch sensor:',
               robot.touch_sensor.get_value(),
               robot.touch_sensor.is_pressed())
         print('Color sensor:',
               robot.color_sensor.get_color(),
               robot.color_sensor.get_reflected_intensity())
-        print('Proximity_sensor',
+        print('Camera:',
+              robot.camera.get_biggest_blob())
+        print('Proximity_sensor:',
               robot.proximity_sensor.get_distance_to_nearest_object(),
               robot.proximity_sensor.get_distance_to_nearest_object_in_inches())
+        print('Beacon_sensor:', robot.beacon_sensor.get_channel(),
+              robot.beacon_sensor.get_distance_to_beacon(),
+              robot.beacon_sensor.get_heading_and_distance_to_beacon())
+        print('Beacon_button_sensor:', robot.beacon_button_sensor.get_channel(),
+              robot.beacon_button_sensor.get_buttons_pressed())
 
         character = input(
             "Press the ENTER (return) key to continue, or q to quit: ")
