@@ -12,8 +12,10 @@ def main():
 
 
 def run_test_beep_when_wave_hands():
-    robot = rb.Snatch3rRobot
-    robot.camera
+    robot = rb.Snatch3rRobot()
+    robot.camera.set_signature()
+
+
 
 
 
