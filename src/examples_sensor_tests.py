@@ -4,7 +4,7 @@
   Fall term, 2018-2019.
 """
 
-import rosebotics_even_newer as rb
+import rosebotics_new as rb
 import time
 
 
@@ -38,14 +38,14 @@ def run_test_sensors():
         # ----------------------------------------------------------------------
         print("Proximity sensor (inches):",
               robot.proximity_sensor.get_distance_to_nearest_object_in_inches())
-        # print("Beacon sensor (cm, degrees):",
-        #       robot.beacon_sensor.get_distance_to_beacon(),
-        #       robot.beacon_sensor.get_heading_to_beacon())
-        # print("Beacon button sensor (top/bottom red, top/bottom blue):",
-        #       robot.beacon_button_sensor.is_top_red_button_pressed(),
-        #       robot.beacon_button_sensor.is_bottom_red_button_pressed(),
-        #       robot.beacon_button_sensor.is_top_blue_button_pressed(),
-        #       robot.beacon_button_sensor.is_bottom_blue_button_pressed())
+        print("Beacon sensor (cm, degrees):",
+              robot.beacon_sensor.get_distance_to_beacon(),
+              robot.beacon_sensor.get_heading_to_beacon())
+        print("Beacon button sensor (top/bottom red, top/bottom blue):",
+              robot.beacon_button_sensor.is_top_red_button_pressed(),
+              robot.beacon_button_sensor.is_bottom_red_button_pressed(),
+              robot.beacon_button_sensor.is_top_blue_button_pressed(),
+              robot.beacon_button_sensor.is_bottom_blue_button_pressed())
 
         character = input(
             "Press the ENTER (return) key to get next sensor reading, or q to quit: ")
