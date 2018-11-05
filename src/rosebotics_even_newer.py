@@ -2,13 +2,13 @@
   Capstone Project.
   This module contains high-level, general-purpose methods for a Snatch3r robot.
 
-  Team members:  PUT_YOUR_NAMES_HERE.
+  Team members:  Yiqi Zhao, Shuang Xia, Rui Fang.
   Fall term, 2018-2019.
 """
-# TODO: Put your names in the above.
-# TODO: Do the TODO's below.
-# TODO: Augment this module as appropriate, being sure to always
-# TODO:   ** coordinate with your teammates ** in doing so.
+# DONE: Put your names in the above.
+# DONE: Do the to-DO's below.
+# DONE: Augment this module as appropriate, being sure to always
+# DONE:   ** coordinate with your teammates ** in doing so.
 
 from ev3dev import ev3
 from enum import Enum
@@ -146,10 +146,10 @@ class DriveSystem(object):
     """
     A class for driving (moving) the robot.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-       their colleagues, the entire team, and PUT_YOUR_NAME_HERE.
+       their colleagues, the entire team, and Yiqi Zhao.
     """
 
-    # TODO: In the above line, put the name of the primary author of this class.
+    # DONE: In the above line, put the name of the primary author of this class.
 
     def __init__(self,
                  left_wheel_port=ev3.OUTPUT_B,
@@ -209,12 +209,23 @@ class DriveSystem(object):
         at the given speed (-100 to 100, where negative means moving backward),
         stopping using the given StopAction (which defaults to BRAKE).
         """
-        # TODO: Use one of the Wheel object's   get_degrees_spun   method.
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from wheel-DEGREES-spun to robot-INCHES-moved.
-        # TODO:   Assume that the conversion is linear with respect to speed.
-        # TODO: Don't forget that the Wheel object's position begins wherever
-        # TODO:   it last was, not necessarily 0.
+        start_time=time.time()
+        if inches>0:
+            ctime=inches*0.1
+            self.start_moving(duty_cycle_percent, duty_cycle_percent)
+        else:
+            ctime=inches*(-0.1)
+            self.start_moving(-duty_cycle_percent, -duty_cycle_percent)
+        while True:
+            if time.time()-start_time>ctime:
+                self.stop_moving()
+                break
+        # DONE: Use one of the Wheel object's   get_degrees_spun   method.
+        # DONE: Do a few experiments to determine the constant that converts
+        # DONE:   from wheel-DEGREES-spun to robot-INCHES-moved.
+        # DONE:   Assume that the conversion is linear with respect to speed.
+        # DONE: Don't forget that the Wheel object's position begins wherever
+        # DONE:   it last was, not necessarily 0.
 
     def spin_in_place_degrees(self,
                               degrees,
@@ -228,12 +239,26 @@ class DriveSystem(object):
         "Spinning in place" means that both wheels spin at the same speed
         but in opposite directions.
         """
-        # TODO: Use one of the Wheel object's   get_degrees_spun   method.
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from WHEEL-degrees-spun to ROBOT-degrees-spun.
-        # TODO:   Assume that the conversion is linear with respect to speed.
-        # TODO: Don't forget that the Wheel object's position begins wherever
-        # TODO:   it last was, not necessarily 0.
+
+        start_time=time.time()
+        if degrees>0:
+
+            stime=degrees*1/120
+            self.start_moving(duty_cycle_percent, -duty_cycle_percent)
+        else:
+            stime=-degrees*1/120
+            self.start_moving(-duty_cycle_percent, duty_cycle_percent)
+        while True:
+            if time.time()-start_time>stime:
+                self.stop_moving()
+                break
+
+        # DONE: Use one of the Wheel object's   get_degrees_spun   method.
+        # DONE: Do a few experiments to determine the constant that converts
+        # DONE:   from WHEEL-degrees-spun to ROBOT-degrees-spun.
+        # DONE:   Assume that the conversion is linear with respect to speed.
+        # DONE: Don't forget that the Wheel object's position begins wherever
+        # DONE:   it last was, not necessarily 0.
 
     def turn_degrees(self,
                      degrees,
@@ -247,12 +272,23 @@ class DriveSystem(object):
         "Turning" means that both ONE wheel spins at the given speed and the
         other wheel does NOT spin.
         """
-        # TODO: Use the Wheel object's   get_degrees_spun   method.
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from WHEEL-degrees-SPUN to ROBOT-degrees-TURNED.
-        # TODO:   Assume that the conversion is linear with respect to speed.
-        # TODO: Don't forget that the Wheel object's position begins wherever
-        # TODO:   it last was, not necessarily 0.
+        start_time=time.time()
+        if degrees>0:
+            stime=degrees*1/(52.5)
+            self.start_moving(duty_cycle_percent,0)
+        else:
+            stime=degrees*(-1/(52.5))
+            self.start_moving(0,duty_cycle_percent)
+        while True:
+            if time.time()-start_time>stime:
+                self.stop_moving()
+                break
+        # DONE: Use the Wheel object's   get_degrees_spun   method.
+        # DONE: Do a few experiments to determine the constant that converts
+        # DONE:   from WHEEL-degrees-SPUN to ROBOT-degrees-TURNED.
+        # DONE:   Assume that the conversion is linear with respect to speed.
+        # DONE: Don't forget that the Wheel object's position begins wherever
+        # DONE:   it last was, not necessarily 0.
 
 
 class TouchSensor(low_level_rb.TouchSensor):
@@ -287,7 +323,6 @@ class ColorSensor(low_level_rb.ColorSensor):
 
     def __init__(self, port=ev3.INPUT_3):
         super().__init__(port)
-
 
     def get_color(self):
         """
@@ -331,7 +366,16 @@ class ColorSensor(low_level_rb.ColorSensor):
         light intensity is less than the given value (threshold), which should
         be between 0 (no light reflected) and 100 (maximum light reflected).
         """
-        # TODO.
+
+        while True:
+            if reflected_light_intensity <= 100 and reflected_light_intensity >= 0:
+                print(self.get_reflected_intensity())
+                if self.get_reflected_intensity() < reflected_light_intensity:
+                    break
+            else:
+                print('Entered Number Over Range')
+
+        # DONE.
 
     def wait_until_intensity_is_greater_than(self, reflected_light_intensity):
         """
@@ -339,7 +383,15 @@ class ColorSensor(low_level_rb.ColorSensor):
         light intensity is greater than the given value (threshold), which
         should be between 0 (no light reflected) and 100 (max light reflected).
         """
-        # TODO.
+
+        while True:
+            if reflected_light_intensity <= 100 and reflected_light_intensity >= -0:
+                print(self.get_reflected_intensity())
+                if self.get_reflected_intensity() > reflected_light_intensity:
+                    break
+            else:
+                print('Entered Number Over Range')
+        # DONE.
 
     def wait_until_color_is(self, color):
         """
@@ -347,15 +399,28 @@ class ColorSensor(low_level_rb.ColorSensor):
         of what color it sees is the given color.
         The given color must be a Color (as defined above).
         """
-        # TODO.
+        while True:
+            if color >= 0 and color <= 7:
+                if self.get_color() == color:
+                    print(color)
+                    break
+            else:
+                print('Entered Color Over Range')
+        # DONE.
 
     def wait_until_color_is_one_of(self, colors):
+
         """
         Waits (doing nothing new) until the sensor's measurement
         of what color it sees is any one of the given sequence of colors.
         Each item in the sequence must be a Color (as defined above).
         """
-        # TODO.
+
+        while True:
+            for k in range(len(colors)):
+                if self.get_color() == colors[k]:
+                    print(colors[k])
+                    break
 
 
 class Camera(object):
@@ -656,9 +721,9 @@ class ArmAndClaw(object):
     """
     A class for the arm and its associated claw.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-    their colleagues, the entire team, and PUT_YOUR_NAME_HERE.
+    their colleagues, the entire team, and Shuang Xia.
     """
-    # TODO: In the above line, put the name of the primary author of this class.
+    # DONE: In the above line, put the name of the primary author of this class.
 
     def __init__(self, touch_sensor, port=ev3.OUTPUT_A):
         # The ArmAndClaw's  motor  is not really a Wheel, of course,
@@ -680,7 +745,15 @@ class ArmAndClaw(object):
         again at a reasonable speed. Then set the motor's position to 0.
         (Hence, 0 means all the way DOWN and 14.2 * 360 means all the way UP).
         """
-        # TODO: Do this as STEP 2 of implementing this class.
+        # DONE: Do this as STEP 2 of implementing this class.
+
+        self.raise_arm_and_close_claw()
+        self.motor.start_spinning(-500)
+        while True:
+            if self.motor.get_degrees_spun() >= 20.2 * 360:
+                self.motor.stop_spinning()
+                break
+        self.position = 0
 
     def raise_arm_and_close_claw(self):
         """
@@ -689,11 +762,21 @@ class ArmAndClaw(object):
         Positive speeds make the arm go UP; negative speeds make it go DOWN.
         Stop when the touch sensor is pressed.
         """
-        # TODO: Do this as STEP 1 of implementing this class.
+        # DONE: Do this as STEP 1 of implementing this class.
+        self.motor.start_spinning(500)
+        self.touch_sensor.wait_until_pressed()
+        self.motor.stop_spinning()
 
     def move_arm_to_position(self, position):
         """
         Spin the arm's motor until it reaches the given position.
         Move at a reasonable speed.
         """
-        # TODO: Do this as STEP 3 of implementing this class.
+        # DONE: Do this as STEP 3 of implementing this class.
+
+        deg = position - self.position
+        self.motor.start_spinning(-500)
+        while True:
+            if self.motor.get_degrees_spun() >= deg:
+                self.motor.stop_spinning()
+                break
