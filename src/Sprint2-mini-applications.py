@@ -2,6 +2,7 @@ import time
 import rosebotics_even_newer as rb
 import ev3dev.ev3 as ev3
 
+
 def main():
     print('Testing arm function')
     run_test_arm()
@@ -16,10 +17,12 @@ def main():
 
 def run_test_beep_when_wave_hands():
     robot = rb.Snatch3rRobot()
-    robot.beacon_button_sensor.get_channel()
+    print(robot.beacon_button_sensor.get_channel())
     while True:
         distance = robot.beacon_sensor.get_distance_to_beacon()
         angle = robot.beacon_sensor.get_heading_to_beacon()
+        print(distance)
+        time.sleep(0.5)
         if distance >=9 and distance <= 13:
             break
     ev3.Sound.beep()
@@ -40,12 +43,15 @@ def run_test_arm():
     robot = rb.Snatch3rRobot()
     print('lowering arm')
     robot.arm.lower_arm_and_open_claw()
-    # time.sleep(3)
-    # print('calibrating')
-    # robot.arm.calibrate()
+    time.sleep(3)
+    print('calibrating')
+    robot.arm.calibrate()
     time.sleep(3)
     print('raising arm')
     robot.arm.raise_arm_and_close_claw()
+    time.sleep(3)
+    print('moving to 30')
+    robot.arm.move_arm_to_position(30)
     time.sleep(3)
     print('moving to 0')
     robot.arm.move_arm_to_position(0)
