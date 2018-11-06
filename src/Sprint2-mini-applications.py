@@ -38,11 +38,17 @@ def run_test_beep_if_blob():
 
 def run_test_arm():
     robot = rb.Snatch3rRobot()
-    robot.arm.calibrate()
+    print('lowering arm')
+    robot.arm.lower_arm_and_open_claw()
+    # time.sleep(3)
+    # print('calibrating')
+    # robot.arm.calibrate()
     time.sleep(3)
+    print('raising arm')
     robot.arm.raise_arm_and_close_claw()
     time.sleep(3)
-    robot.arm.move_arm_to_position(100) #FIXME
+    print('moving to 0')
+    robot.arm.move_arm_to_position(0)
 
 
 main()

@@ -36,7 +36,7 @@ def move_to_beacon():
     while True:
         robot.drive_system.spin_in_place_degrees(3)
         angle = robot.beacon_sensor.get_heading_to_beacon()
-        if angle <= 5 and angle >= -5:
+        if angle <= 3 and angle >= -3:
             while True:
                 robot.drive_system.start_moving()
                 if robot.beacon_sensor.get_distance_to_beacon() <= 5:
