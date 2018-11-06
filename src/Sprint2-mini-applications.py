@@ -16,7 +16,7 @@ def main():
 
 def run_test_beep_when_wave_hands():
     robot = rb.Snatch3rRobot()
-    robot.beacon_button_sensor.get_channel(1)
+    robot.beacon_button_sensor.get_channel()
     while True:
         distance = robot.beacon_sensor.get_distance_to_beacon()
         angle = robot.beacon_sensor.get_heading_to_beacon()
@@ -42,7 +42,7 @@ def run_test_arm():
     time.sleep(3)
     robot.arm.raise_arm_and_close_claw()
     time.sleep(3)
-    robot.arm.move_arm_to_position(300)
+    robot.arm.move_arm_to_position(100) #FIXME
 
 
 main()

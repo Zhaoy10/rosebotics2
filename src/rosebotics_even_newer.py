@@ -725,7 +725,7 @@ class ArmAndClaw(object):
     """
     A class for the arm and its associated claw.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-    their colleagues, the entire team, and Shuang Xia.
+    their colleagues, the entire team, and Shuang Xia and Rui Fang.
     """
     # DONE: In the above line, put the name of the primary author of this class.
 
@@ -740,7 +740,9 @@ class ArmAndClaw(object):
         # Sets the motor's position to 0 (the DOWN position).
         # At the DOWN position, the robot fits in its plastic bin,
         # so we start with the ArmAndClaw in that position.
-        self.calibrate()
+        self.motor.reset_degrees_spun()
+        self.position = 0
+
 
     def calibrate(self):
         """
@@ -751,13 +753,19 @@ class ArmAndClaw(object):
         """
         # DONE: Do this as STEP 2 of implementing this class.
 
-        self.raise_arm_and_close_claw()
-        self.motor.start_spinning(-500)
         while True:
-            if self.motor.get_degrees_spun() >= 20.2 * 360:
+            self.motor.start_spinning(100)
+            if self.motor.get_degrees_spun() >= 14.2*360:
                 self.motor.stop_spinning()
                 break
-        self.position = 0
+        self.motor.reset_degrees_spun(0)
+
+    def lower_arm_and_open_claw(self):
+        while True:
+            self.motor.start_spinning(-100)
+            if self.motor.reset_degrees_spun(0):
+                break
+        self.motor.stop_spinning()
 
     def raise_arm_and_close_claw(self):
         """
@@ -767,7 +775,7 @@ class ArmAndClaw(object):
         Stop when the touch sensor is pressed.
         """
         # DONE: Do this as STEP 1 of implementing this class.
-        self.motor.start_spinning(500)
+        self.motor.start_spinning(100)
         self.touch_sensor.wait_until_pressed()
         self.motor.stop_spinning()
 
@@ -779,8 +787,14 @@ class ArmAndClaw(object):
         # DONE: Do this as STEP 3 of implementing this class.
 
         deg = position - self.position
-        self.motor.start_spinning(-500)
-        while True:
-            if self.motor.get_degrees_spun() >= deg:
-                self.motor.stop_spinning()
-                break
+        if deg >= 0:
+            while True:
+                self.motor.start_spinning(-100)
+                if abs(self.motor.get_degrees_spun()) >= abs(deg):
+                    self.motor.stop_spinning()
+                    break
+        else:
+            while True:
+                self.motor.start_spinning(100)
+                if abs(self.motor.get_degrees_spun()) >= abs(deg):
+                    self.motor.stop_spinning()
