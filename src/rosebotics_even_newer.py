@@ -741,7 +741,6 @@ class ArmAndClaw(object):
         # At the DOWN position, the robot fits in its plastic bin,
         # so we start with the ArmAndClaw in that position.
         self.motor.reset_degrees_spun()
-        self.position = 0
 
     def calibrate(self):
         """
@@ -752,18 +751,15 @@ class ArmAndClaw(object):
         """
         # DONE: Do this as STEP 2 of implementing this class.
         self.raise_arm_and_close_claw()
-        while True:
-            self.motor.start_spinning(-70)
-            if abs(self.motor.get_degrees_spun()) >= 8*360:
-                break
-            self.motor.stop_spinning()
+        self.motor.start_spinning(-70)
+        time.sleep(9.5)
+        self.motor.stop_spinning()
         self.motor.reset_degrees_spun()
 
     def lower_arm_and_open_claw(self):
         self.motor.start_spinning(-70)
         self.touch_sensor.wait_until_pressed()
         self.motor.stop_spinning()
-        self.motor.reset_degrees_spun()
 
     def raise_arm_and_close_claw(self):
         """
@@ -773,7 +769,7 @@ class ArmAndClaw(object):
         Stop when the touch sensor is pressed.
         """
         # DONE: Do this as STEP 1 of implementing this class.
-        self.motor.start_spinning(70)
+        self.motor.start_spinning(100)
         self.touch_sensor.wait_until_pressed()
         self.motor.stop_spinning()
 
@@ -784,15 +780,28 @@ class ArmAndClaw(object):
         """
         # DONE: Do this as STEP 3 of implementing this class.
 
-        deg = position - self.position
-        if deg >= 0:
-            while True:
-                self.motor.start_spinning(-70)
-                if abs(self.motor.get_degrees_spun()) >= abs(deg):
-                    self.motor.stop_spinning()
-                    break
-        else:
+        move = position-self.motor.get_degrees_spun()
+        initial = self.motor.get_degrees_spun()
+        if move >= 0:
             while True:
                 self.motor.start_spinning(70)
-                if abs(self.motor.get_degrees_spun()) >= abs(deg):
+                print('Total degree need to move: ', move)
+                print('Degree now: ', self.motor.get_degrees_spun())
+                time.sleep(0.5)
+                if self.motor.get_degrees_spun()-initial >= move:
                     self.motor.stop_spinning()
+                    break
+
+        else:
+            temp = self.motor.get_degrees_spun()
+            print('Degree now: ', temp)
+            while True:
+                self.motor.start_spinning(-70)
+                print('Total degree need to move: ', move)
+                print('Degree now: ', self.motor.get_degrees_spun() - temp)
+                time.sleep(0.5)
+                if self.motor.get_degrees_spun()-temp <= move:
+                    break
+            self.motor.stop_spinning()
+
+
