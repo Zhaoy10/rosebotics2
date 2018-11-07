@@ -27,16 +27,7 @@ def run_tests():
 
 
 def run_infrared_beacon():
-    gui = tkinter.Tk()
-    gui.geometry('100x100')
-
-    frame1 = ttk.Frame(gui, padding=10)
-    frame1.grid()
-
-    irbtn = ttk.Button(frame1, text='Infrared Beacon', command=None)
-    irbtn.grid()
-
-    gui.mainloop()
+    pass
 
 
 def move_to_beacon():
