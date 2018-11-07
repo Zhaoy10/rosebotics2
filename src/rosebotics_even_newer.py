@@ -307,11 +307,15 @@ class TouchSensor(low_level_rb.TouchSensor):
 
     def wait_until_pressed(self):
         """ Waits (doing nothing new) until the touch sensor is pressed. """
-        # TODO.
+        while True:
+            if self.get_value() == 1:
+                break
 
     def wait_until_released(self):
         """ Waits (doing nothing new) until the touch sensor is released. """
-        # TODO
+        while True:
+            if self.get_value() == 0:
+                break
 
 
 class ColorSensor(low_level_rb.ColorSensor):
@@ -493,7 +497,7 @@ class Blob(object):
         self.center = center
         self.width = width
         self.height = height
-        self.screen_limits = Point(320, 240)  # FIXME
+        self.screen_limits = Point(319, 199)  # FIXED
 
     def __repr__(self):
         return "center: ({:3d}, {:3d})  width, height: {:3d} {:3d}.".format(
@@ -643,14 +647,14 @@ class InfraredAsBeaconButtonSensor(object):
     def get_channel(self):
         return self.channel
 
-    # def get_buttons_pressed(self):
-    #     """
-    #     Returns a list of the numbers corresponding to buttons on the Beacon
-    #     which are currently pressed.
-    #     """
-    #     button_list = self._underlying_ir_sensor.buttons_pressed
-    #     for k in range(len(button_list)):
-    #         button_list[k] = self.button_names[button_list[k]]
+    def get_buttons_pressed(self):
+        """
+        Returns a list of the numbers corresponding to buttons on the Beacon
+        which are currently pressed.
+        """
+        button_list = self._underlying_ir_sensor.buttons_pressed
+        for k in range(len(button_list)):
+            button_list[k] = self.button_names[button_list[k]]
 
     def is_top_red_button_pressed(self):
         return self._underlying_ir_sensor.red_up
@@ -721,7 +725,7 @@ class ArmAndClaw(object):
     """
     A class for the arm and its associated claw.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-    their colleagues, the entire team, and Shuang Xia.
+    their colleagues, the entire team, and Shuang Xia and Rui Fang.
     """
     # DONE: In the above line, put the name of the primary author of this class.
 
@@ -736,7 +740,7 @@ class ArmAndClaw(object):
         # Sets the motor's position to 0 (the DOWN position).
         # At the DOWN position, the robot fits in its plastic bin,
         # so we start with the ArmAndClaw in that position.
-        self.calibrate()
+        self.motor.reset_degrees_spun()
 
     def calibrate(self):
         """
@@ -746,14 +750,16 @@ class ArmAndClaw(object):
         (Hence, 0 means all the way DOWN and 14.2 * 360 means all the way UP).
         """
         # DONE: Do this as STEP 2 of implementing this class.
-
         self.raise_arm_and_close_claw()
-        self.motor.start_spinning(-500)
-        while True:
-            if self.motor.get_degrees_spun() >= 20.2 * 360:
-                self.motor.stop_spinning()
-                break
-        self.position = 0
+        self.motor.start_spinning(-70)
+        time.sleep(9.5)
+        self.motor.stop_spinning()
+        self.motor.reset_degrees_spun()
+
+    def lower_arm_and_open_claw(self):
+        self.motor.start_spinning(-70)
+        self.touch_sensor.wait_until_pressed()
+        self.motor.stop_spinning()
 
     def raise_arm_and_close_claw(self):
         """
@@ -763,7 +769,7 @@ class ArmAndClaw(object):
         Stop when the touch sensor is pressed.
         """
         # DONE: Do this as STEP 1 of implementing this class.
-        self.motor.start_spinning(500)
+        self.motor.start_spinning(100)
         self.touch_sensor.wait_until_pressed()
         self.motor.stop_spinning()
 
@@ -774,9 +780,28 @@ class ArmAndClaw(object):
         """
         # DONE: Do this as STEP 3 of implementing this class.
 
-        deg = position - self.position
-        self.motor.start_spinning(-500)
-        while True:
-            if self.motor.get_degrees_spun() >= deg:
-                self.motor.stop_spinning()
-                break
+        move = position-self.motor.get_degrees_spun()
+        initial = self.motor.get_degrees_spun()
+        if move >= 0:
+            while True:
+                self.motor.start_spinning(70)
+                print('Total degree need to move: ', move)
+                print('Degree now: ', self.motor.get_degrees_spun())
+                time.sleep(0.5)
+                if self.motor.get_degrees_spun()-initial >= move:
+                    self.motor.stop_spinning()
+                    break
+
+        else:
+            temp = self.motor.get_degrees_spun()
+            print('Degree now: ', temp)
+            while True:
+                self.motor.start_spinning(-70)
+                print('Total degree need to move: ', move)
+                print('Degree now: ', self.motor.get_degrees_spun() - temp)
+                time.sleep(0.5)
+                if self.motor.get_degrees_spun()-temp <= move:
+                    break
+            self.motor.stop_spinning()
+
+
