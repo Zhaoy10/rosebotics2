@@ -46,10 +46,10 @@ def run_infrared_beacon_buttons():
     frame1 = ttk.Frame(gui, padding=10)
     frame1.grid()
 
-    redup = ttk.Button(frame1, text='Red Up', command=red_up_on_click())
+    redup = ttk.Button(frame1, text='Red Up', command=lambda: red_up_on_click())
     redup.grid()
 
-    blueup = ttk.Button(frame1, text='Blue Up', command=None)
+    blueup = ttk.Button(frame1, text='Blue Up', command=lambda: blue_up_on_click())
     blueup.grid()
 
     gui.mainloop()
@@ -60,7 +60,7 @@ def red_up_on_click():
     print('Red On Click')
 
 
-def blue_up_on_clicl():
+def blue_up_on_click():
     mqtt_client.send_message('move', [-11])
     print('Blue On Click')
 

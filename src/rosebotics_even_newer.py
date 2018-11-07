@@ -2,7 +2,7 @@
   Capstone Project.
   This module contains high-level, general-purpose methods for a Snatch3r robot.
 
-  Team members:  Yiqi Zhao, Shuang Xia, Rui Fang.
+  Team members:  Rui Fang, Yiqi Zhao, Shuang Xia.
   Fall term, 2018-2019.
 """
 # DONE: Put your names in the above.
@@ -530,9 +530,9 @@ class InfraredAsProximitySensor(low_level_rb.InfraredSensor):
     A class for the infrared sensor when it is in the mode in which it
     measures distance to the nearest object that it sees.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-       their colleagues, the entire team, and PUT_YOUR_NAME_HERE.
+       their colleagues, the entire team, and Unknown.
     """
-    # TODO: In the above line, put the name of the primary author of this class.
+    # DONE: In the above line, put the name of the primary author of this class.
 
     def __init__(self, ir_sensor_port):
         super().__init__(ir_sensor_port)
@@ -620,9 +620,9 @@ class InfraredAsBeaconButtonSensor(object):
     A class for the infrared sensor when it is in the mode in which it
     measures which (if any) of the Beacon buttons are being pressed.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-    their colleagues, the entire team, and PUT_YOUR_NAME_HERE.
+    their colleagues, the entire team, and Unknown.
     """
-    # TODO: In the above line, put the name of the primary author of this class.
+    # DONE: In the above line, put the name of the primary author of this class.
 
     def __init__(self, channel=1):
         self.channel = channel
@@ -674,9 +674,9 @@ class BrickButtonSensor(object):
     """
     A class for the buttons on the Brick.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-    their colleagues, the entire team, and PUT_YOUR_NAME_HERE.
+    their colleagues, the entire team, and Unknown.
     """
-    # TODO: In the above line, put the name of the primary author of this class.
+    # DONE: In the above line, put the name of the primary author of this class.
 
     def __init__(self):
         self._underlying_sensor = low_level_rb.BrickButtonSensor()

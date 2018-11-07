@@ -1,3 +1,8 @@
+"""
+  Capstone Project.  Code written by Rui Fang.
+  Fall term, 2018-2019.
+"""
+
 import time
 import rosebotics_even_newer as rb
 import ev3dev.ev3 as ev3
@@ -20,7 +25,7 @@ def run_test_beep_when_wave_hands():
     print(robot.beacon_button_sensor.get_channel())
     while True:
         distance = robot.beacon_sensor.get_distance_to_beacon()
-        angle = robot.beacon_sensor.get_heading_to_beacon()
+        # angle = robot.beacon_sensor.get_heading_to_beacon()
         print(distance)
         time.sleep(0.5)
         if distance >=9 and distance <= 13:
