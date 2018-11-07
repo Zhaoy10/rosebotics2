@@ -7,56 +7,65 @@ Also: responds to Beacon button-presses by beeping, speaking.
 This module runs on the ROBOT.
 It uses MQTT to RECEIVE information from a program running on the LAPTOP.
 
-Authors:  David Mutchler, his colleagues, and PUT_YOUR_NAME_HERE.
+Authors:  David Mutchler, his colleagues, and Rui Fang.
 """
-# ------------------------------------------------------------------------------
-# TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.  Then delete this TODO.
-# ------------------------------------------------------------------------------
 
-# ------------------------------------------------------------------------------
-# TODO: 2. With your instructor, review the "big picture" of laptop-robot
-# TODO:    communication, per the comment in mqtt_sender.py.
-# TODO:    Once you understand the "big picture", delete this TODO.
-# ------------------------------------------------------------------------------
-
-import rosebotics_new as rb
+import rosebotics_even_newer as rb
 import time
 import mqtt_remote_method_calls as com
 import ev3dev.ev3 as ev3
 
 
+class MyDelegate(object):
+
+    def __init__(self):
+        self.robot = rb.Snatch3rRobot()
+        self.mqtt_client = None
+        self.ev3 = ev3
+
+    def go(self, distance):
+        self.robot.drive_system.go_straight_inches(int(distance))
+
+    def button_pressed(self, button):
+        if button == 'top-red':
+            ev3.Sound.beep()
+
+        if button == 'top-blue':
+            ev3.Sound.speak('Hello. How are you?')
+
+    def play_song(self):
+        ev3.Sound.tone([
+            (392, 350, 100), (392, 350, 100), (392, 350, 100), (311.1, 250, 100),
+            (466.2, 25, 100), (392, 350, 100), (311.1, 250, 100), (466.2, 25, 100),
+            (392, 700, 100), (587.32, 350, 100), (587.32, 350, 100),
+            (587.32, 350, 100), (622.26, 250, 100), (466.2, 25, 100),
+            (369.99, 350, 100), (311.1, 250, 100), (466.2, 25, 100), (392, 700, 100),
+            (784, 350, 100), (392, 250, 100), (392, 25, 100), (784, 350, 100),
+            (739.98, 250, 100), (698.46, 25, 100), (659.26, 25, 100),
+            (622.26, 25, 100), (659.26, 50, 400), (415.3, 25, 200), (554.36, 350, 100),
+            (523.25, 250, 100), (493.88, 25, 100), (466.16, 25, 100), (440, 25, 100),
+            (466.16, 50, 400), (311.13, 25, 200), (369.99, 350, 100),
+            (311.13, 250, 100), (392, 25, 100), (466.16, 350, 100), (392, 250, 100),
+            (466.16, 25, 100), (587.32, 700, 100), (784, 350, 100), (392, 250, 100),
+            (392, 25, 100), (784, 350, 100), (739.98, 250, 100), (698.46, 25, 100),
+            (659.26, 25, 100), (622.26, 25, 100), (659.26, 50, 400), (415.3, 25, 200),
+            (554.36, 350, 100), (523.25, 250, 100), (493.88, 25, 100),
+            (466.16, 25, 100), (440, 25, 100), (466.16, 50, 400), (311.13, 25, 200),
+            (392, 350, 100), (311.13, 250, 100), (466.16, 25, 100),
+            (392.00, 300, 150), (311.13, 250, 100), (466.16, 25, 100), (392, 700)
+        ]).wait()
+
+
+
 def main():
-    # --------------------------------------------------------------------------
-    # TODO: 3. Construct a Snatch3rRobot.  Test.  When OK, delete this TODO.
-    # --------------------------------------------------------------------------
+    robot_action = MyDelegate()
+    mqtt_client = com.MqttClient(robot_action)
+    robot_action.mqtt_client = mqtt_client
+    mqtt_client.connect('robo32', 'fr')
+    mqtt_client.send_message('Connected!')
 
-    # --------------------------------------------------------------------------
-    # TODO: 4. Add code that constructs a   com.MqttClient   that will
-    # TODO:    be used to receive commands sent by the laptop.
-    # TODO:    Connect it to this robot.  Test.  When OK, delete this TODO.
-    # --------------------------------------------------------------------------
-
-    # --------------------------------------------------------------------------
-    # TODO: 5. Add a class for your "delegate" object that will handle messages
-    # TODO:    sent from the laptop.  Construct an instance of the class and
-    # TODO:    pass it to the MqttClient constructor above.  Augment the class
-    # TODO:    as needed for that, and also to handle the go_forward message.
-    # TODO:    Test by PRINTING, then with robot.  When OK, delete this TODO.
-    # --------------------------------------------------------------------------
-
-    # --------------------------------------------------------------------------
-    # TODO: 6. With your instructor, discuss why the following WHILE loop,
-    # TODO:    that appears to do nothing, is necessary.
-    # TODO:    When you understand this, delete this TODO.
-    # --------------------------------------------------------------------------
     while True:
-        # ----------------------------------------------------------------------
-        # TODO: 7. Add code that makes the robot beep if the top-red button
-        # TODO:    on the Beacon is pressed.  Add code that makes the robot
-        # TODO:    speak "Hello. How are you?" if the top-blue button on the
-        # TODO:    Beacon is pressed.  Test.  When done, delete this TODO.
-        # ----------------------------------------------------------------------
-        time.sleep(0.01)  # For the delegate to do its work
+        time.sleep(0.01)
 
 
 main()
