@@ -756,11 +756,6 @@ class ArmAndClaw(object):
         self.motor.stop_spinning()
         self.motor.reset_degrees_spun()
 
-    def lower_arm_and_open_claw(self):
-        self.motor.start_spinning(-70)
-        self.touch_sensor.wait_until_pressed()
-        self.motor.stop_spinning()
-
     def raise_arm_and_close_claw(self):
         """
         Raise the arm (and hence close the claw), by making this ArmAndClaw
