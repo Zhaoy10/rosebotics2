@@ -31,7 +31,16 @@ def run_infrared_beacon():
 
 
 def move_to_beacon():
-    pass
+    gui = tkinter.TK()
+    gui.title ='move to beacon'
+    gui.geometry('100x100')
+
+    frame1= ttk.Frame(gui, padding=100)
+    frame1.grid()
+
+    start = ttk.Button(frame1,text='start',command=lamda:)
+    start.grid()
+
 
 
 def run_infrared_beacon_buttons():

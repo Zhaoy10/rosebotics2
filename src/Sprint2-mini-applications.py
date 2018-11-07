@@ -21,10 +21,16 @@ def main():
 
 
 def run_test_beep_when_wave_hands():
-    pass
+    robot=rb.Snatch3rRobot
+
 
 def run_test_beep_if_blob():
-    pass
+    robot=rb.Snatch3rRobot()
+    blob=robot.camera.get_biggest_blob()
+    if blob.get_area() >= 1000:
+        print("Beeping:")
+        ev3.Sound.beep().wait()
+
 
 
 def run_test_arm():
