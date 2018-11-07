@@ -1,3 +1,8 @@
+"""
+  Capstone Project.  Code written by Rui Fang.
+  Fall term, 2018-2019.
+"""
+
 import ev3dev.ev3 as ev3
 import time
 import rosebotics_even_newer as rb
@@ -39,6 +44,7 @@ def move_to_beacon():
 
 
 def run_infrared_beacon_buttons():
+    """"""
     gui = tkinter.Tk()
     gui.title = 'Robot Controller'
     gui.geometry('80x100')

@@ -1,5 +1,5 @@
 """
-  Capstone Project.  Code written by Rui Fang.
+  Capstone Project.  Code written by Rui Fang, Yiqi Zhao.
   Fall term, 2018-2019.
 """
 
