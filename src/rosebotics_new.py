@@ -2,7 +2,7 @@
   Capstone Project.
   This module contains high-level, general-purpose methods for a Snatch3r robot.
 
-  Team members:  Yiqi Zhao, Shuang Xia, Rui Fang.
+  Team members:  Rui Fang, Yiqi Zhao, Shuang Xia.
   Fall term, 2018-2019.
 """
 # DONE: Put your names in the above.

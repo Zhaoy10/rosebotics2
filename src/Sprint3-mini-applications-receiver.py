@@ -1,3 +1,8 @@
+"""
+  Capstone Project.  Code written by Rui Fang.
+  Fall term, 2018-2019.
+"""
+
 import mqtt_remote_method_calls as com
 import time
 import ev3dev.ev3 as ev3
