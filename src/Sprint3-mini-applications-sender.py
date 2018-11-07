@@ -47,15 +47,18 @@ def run_infrared_beacon_buttons():
     """"""
     gui = tkinter.Tk()
     gui.title = 'Robot Controller'
-    gui.geometry('80x100')
+    gui.geometry('80x150')
 
     frame1 = ttk.Frame(gui, padding=10)
     frame1.grid()
 
+    frame2 = ttk.Frame(gui, padding=30)
+    frame2.grid()
+
     redup = ttk.Button(frame1, text='Red Up', command=lambda: red_up_on_click())
     redup.grid()
 
-    blueup = ttk.Button(frame1, text='Blue Up', command=lambda: blue_up_on_click())
+    blueup = ttk.Button(frame2, text='Blue Up', command=lambda: blue_up_on_click())
     blueup.grid()
 
     gui.mainloop()
