@@ -9,7 +9,7 @@ def main():
     name2 = input("Enter another name: ")
 
     mqtt_client = com.MqttClient()
-    mqtt_client.connect(name1, name2)
+    mqtt_client.connect  (name1, name2)
     time.sleep(1)  # Time to allow the MQTT setup.
 
     while True:

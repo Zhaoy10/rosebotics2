@@ -675,7 +675,7 @@ class BrickButtonSensor(object):
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
     their colleagues, the entire team, and PUT_YOUR_NAME_HERE.
     """
-    # TODO: In the above line, put the name of the primary author of this class.
+    # DONE: In the above line, put the name of the primary author of this class.
 
     def __init__(self):
         self._underlying_sensor = low_level_rb.BrickButtonSensor()
