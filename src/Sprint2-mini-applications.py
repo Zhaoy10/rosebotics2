@@ -9,9 +9,9 @@ import ev3dev.ev3 as ev3
 
 
 def main():
-    print('Testing arm function')
-    run_test_arm()
-    time.sleep(5)
+    # print('Testing arm function')
+    # run_test_arm()
+    # time.sleep(5)
     print('Testing beep when wave hands')
     run_test_beep_when_wave_hands()
     time.sleep(5)
