@@ -12,27 +12,24 @@ def main():
     print('Testing arm function')
     run_test_arm()
     time.sleep(5)
-    # print('Testing beep when wave hands')
-    # run_test_beep_when_wave_hands()
-    # time.sleep(5)
-    # print('Testing beep when see big blob')
-    # run_test_beep_if_blob()
-    # time.sleep(5)
+    print('Testing beep when wave hands')
+    run_test_beep_when_wave_hands()
+    time.sleep(5)
+    print('Testing beep when see big blob')
+    run_test_beep_if_blob()
+    time.sleep(5)
 
 
 def run_test_beep_when_wave_hands():
-    robot=rb.Snatch3rRobot
-
-def beep_when_wave_hands():
     robot = rb.Snatch3rRobot()
     print('test ir sensor, exit by press the button or ctrl + c')
     print('ir sensor as proximity sensor')
     print('the robot will beep when the object is within [9, 15] inches')
     while True:
-        if robot.proximity_sensor.get_distance_to_nearest_object_in_inches() <= 15:
-            print(robot.proximity_sensor.get_distance_to_nearest_object_in_inches())
-            ev3.Sound.beep().wait(0.1)
-        if robot.touch_sensor.is_pressed() is True:
+        distance = robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
+        if distance <= 15 and distance >=9:
+            print(distance)
+            ev3.Sound.beep().wait()
             break
 
 
@@ -42,7 +39,6 @@ def run_test_beep_if_blob():
     if blob.get_area() >= 1000:
         print("Beeping:")
         ev3.Sound.beep().wait()
-
 
 
 def run_test_arm():

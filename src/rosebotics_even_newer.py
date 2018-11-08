@@ -613,7 +613,6 @@ class InfraredAsBeaconSensor(object):
         Units are per the   get_heading_and_distance_to_beacon   method.
         """
         return self._underlying_ir_sensor.distance
-    def find_
 
 
 class InfraredAsBeaconButtonSensor(object):
