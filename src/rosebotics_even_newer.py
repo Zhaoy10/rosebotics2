@@ -108,12 +108,14 @@ class Button(Enum):
 #   self.drive_system:   DriveSystem
 #   self.arm:            ArmAndClaw
 # ------------------------------------------------------------------------------
+
 class Snatch3rRobot(object):
     """
     An EV3 Snatch3r Robot.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
        their colleagues, and the entire team.
     """
+    running = False
 
     def __init__(self,
                  left_wheel_port=ev3.OUTPUT_B,
@@ -132,14 +134,51 @@ class Snatch3rRobot(object):
         self.color_sensor = ColorSensor(color_sensor_port)
         self.camera = Camera(camera_port)
 
-        self.proximity_sensor = InfraredAsProximitySensor(ir_sensor_port)
+        #self.proximity_sensor = InfraredAsProximitySensor(ir_sensor_port)
         self.beacon_sensor = InfraredAsBeaconSensor(channel=1)
-        self.beacon_button_sensor = InfraredAsBeaconButtonSensor(channel=1)
+        #self.beacon_button_sensor = InfraredAsBeaconButtonSensor(channel=1)
 
         self.brick_button_sensor = BrickButtonSensor()
 
         self.drive_system = DriveSystem(left_wheel_port, right_wheel_port)
         self.arm = ArmAndClaw(self.touch_sensor, arm_port)
+
+    def loop_forever(self):
+        self.running = True
+        while(self.running == True):
+            time.sleep(0.1)
+
+    def shut_down(self):
+        self.running = False
+
+    def find_beacon(self):
+        print('calibrating')
+        self.arm.calibrate()
+        while True:
+            self.drive_system.spin_in_place_degrees(3)
+            angle = self.beacon_sensor.get_heading_to_beacon()
+            print(angle)
+            if angle <= 1 and angle >= -1:
+                print('Beacon Found')
+                time.sleep(5)
+                while True:
+                    self.drive_system.start_moving()
+                    if self.beacon_sensor.get_distance_to_beacon() <= 1:
+                        self.drive_system.stop_moving()
+
+                        print('moving to 4500')
+                        self.arm.move_arm_to_position(4500)
+                        time.sleep(3)
+                        print('spin')
+                        self.drive_system.spin_in_place_degrees(360)
+                        print('calibrating')
+                        self.arm.calibrate()
+                        break
+                break
+
+            time.sleep(.01)
+
+
 
 
 class DriveSystem(object):

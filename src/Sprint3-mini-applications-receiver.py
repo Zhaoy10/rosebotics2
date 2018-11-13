@@ -7,6 +7,7 @@ import mqtt_remote_method_calls as com
 import time
 import ev3dev.ev3 as ev3
 import rosebotics_even_newer as rb
+from ev3dev import
 
 
 class MyDelegate(object):
@@ -45,14 +46,14 @@ class MyDelegate(object):
 
 
 def main():
-    robot_action = MyDelegate()
-    mqtt_client = com.MqttClient(robot_action)
-    robot_action.mqtt_client = mqtt_client
-    mqtt_client.connect('robo32', 'fr')
-    mqtt_client.send_message('Connected!')
+     robot_action = MyDelegate()
+     mqtt_client = com.MqttClient(robot_action)
+     robot_action.mqtt_client = mqtt_client
+     mqtt_client.connect('robo32', 'fr')
+     mqtt_client.send_message('Connected!')
 
-    while True:
-        time.sleep(0.01)  # Time to allow message processing
+     while True:
+         time.sleep(0.01)  # Time to allow message processing
 
 
 main()
